@@ -13,13 +13,13 @@ const confirm = Modal.confirm;
  */
 export const FetchPost = (api, 
   body, 
-  type='application/x-www-form-urlencoded', 
+  type='application/x-www-form-urlencoded', //数据被编码为名称/值对
   method='post') => {
   const query = typeof body === 'object' ? JSON.stringify(body) : body;
   return fetch(api, {
     method: method,
     credentials: 'include',
-    mode: 'cors',
+    mode: 'cors',//跨域用的
     headers: {
       'Content-Type': type
     },
