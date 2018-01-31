@@ -210,5 +210,6 @@ class Login extends React.Component {
   }
 }
 
-module.exports = Login;
+module.exports = Login; //require.ensure中分割的组件，需要使用module.export 暴露出来
+
 //export default Login;
