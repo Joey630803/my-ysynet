@@ -1,0 +1,161 @@
+{
+    "id": 252680,
+    "name": "admin",
+    "menu": [
+        {
+          "key": "0",
+          "name": "首页",
+          "path": "/home",
+          "index": 0
+        },
+        {
+          "key": "system",
+          "name": "系统模块",
+          "path": "/system/user",
+          "index": 1 ,
+          "subMenu": [{
+            "key": "user",
+            "name": "用户管理",
+            "path": "/system/user",
+            "index": 1
+          },{
+            "key": "userGroup",
+            "name": "用户组管理",
+            "path": "/system/userGroup",
+            "index": 2
+          },{
+            "key": "message",
+            "name": "消息配置",
+            "path": "/system/message",
+            "index": 3
+          },{
+            "key": "record",
+            "name": "操作记录",
+            "path": "/system/record",
+            "index": 4
+          },{
+            "key": "customerUser",
+            "name": "客户用户管理",
+            "path": "/system/customerUser",
+            "index": 5
+          },{
+            "key": "customerUserGroup",
+            "name": "客户用户组管理",
+            "path": "/system/customerUserGroup",
+            "index": 6
+          }]
+        },
+        {
+          "key": "basicData",
+          "name": "基础模块",
+          "path": "/basicData/mechanism",
+          "index": 2,
+          "subMenu": [{
+            "key": "mechanism",
+            "name": "机构管理",
+            "path": "/basicData/mechanism",
+            "index": 1
+          }, {
+            "key": "product",
+            "name": "产品管理",
+            "path": "/basicData/product",
+            "index": 2
+          }]
+        },
+        {
+          "key": "checkdata",
+          "name": "审核模块",
+          "path": "/checkdata/mechanism",
+          "index": 3,
+          "subMenu": [{
+            "key": "mechanism",
+            "name": "机构审核",
+            "path": "/checkdata/mechanism",
+            "index": 1
+           }]
+        },
+        {
+          "key": "implement",
+          "name": "实施模块",
+          "path": "/implement/module",
+          "index": 4,
+           "subMenu": [{
+            "key": "module",
+            "name": "模块管理",
+            "path": "/implement/module",
+            "index": 1
+           }]
+        },
+        {
+          "key": "purchase",
+          "name": "采购管理",
+          "path": "/purchase/supplier",
+          "index": 5,
+          "subMenu": [{
+            "key": "supplier",
+            "name": "我的供应商",
+            "path": "/purchase/supplier",
+            "index": 1
+          }, {
+            "key": "order",
+            "name": "订单管理",
+            "path": "/",
+            "index": 2
+          },{
+            "key": "delivery",
+            "name": "送货单查询",
+            "path": "/",
+            "index": 3
+          }, {
+            "key": "invoice",
+            "name": "发票查询",
+            "path": "/",
+            "index": 4
+          }]
+        },
+        {
+          "key": "sales",
+          "name": "销售管理",
+          "path": "/sales/customer",
+          "index": 6,
+            "subMenu": [{
+            "key": "customer",
+            "name": "客户管理",
+            "path": "/sales/customer",
+            "index": 1
+            }, {
+              "key": "order",
+              "name": "订单管理",
+              "path": "/sales/order",
+              "index": 2
+            }, {
+              "key": "delivery",
+              "name": "送货管理",
+              "path": "/sales/delivery",
+              "index": 3
+            }, {
+              "key": "invoice",
+              "name": "发票管理",
+              "path": "/sales/invoice",
+              "index": 4
+            }]
+        },
+        {
+          "key": "storage",
+          "name": "库房管理",
+          "path": "/storage",
+          "index": 1 ,
+          "subMenu": [{
+            "key": "storage",
+            "name": "库房管理",
+            "path": "/system/storage",
+            "index": 1
+          },{
+            "key": "customerStorage",
+            "name": "客户库房管理",
+            "path": "/storage/customerStorage",
+            "index": 2
+          }]
+        }
+    ]
+}
