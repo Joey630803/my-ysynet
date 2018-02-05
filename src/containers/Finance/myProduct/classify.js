@@ -151,7 +151,7 @@ class FinanceClassify extends React.Component{
                                         <div className="ant-form-item-control">
                                             <TreeSelect
                                                 showSearch
-                                                style={{ width: 400 }}
+                                                style={{ width: 300 }}
                                                 dropdownStyle={{ maxHeight: 300, overflow: 'auto' }}
                                                 placeholder="请选择"
                                                 allowClear

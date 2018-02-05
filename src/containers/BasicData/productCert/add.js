@@ -64,7 +64,7 @@ class AddForm extends React.Component {
         if (!type) {
         message.error('您只能上传image/jpeg、png、bmp!');
         }
-        const isLt5M = file.size / 1024 / 1024  < 5;
+        const isLt5M = file.size   < 5 * 1024 * 1024;
         if (!isLt5M) {
         message.error('上传文件不能大于 5MB!');
         }
@@ -73,11 +73,12 @@ class AddForm extends React.Component {
     }
      //上传附件限制大小
     beforeUploadFile = (file) => {
-        const type =  file.type === 'application/pdf' || file.type ==='application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        const typeinfo = file.name.toLowerCase().split('.').splice(-1)[0];
+        const type =  typeinfo === 'pdf' || typeinfo ==='docx'|| typeinfo ==='doc'|| typeinfo ==='zip'|| typeinfo ==='rar';
         if (!type) {
-        message.error('您只能上传pdf/doc!');
+            message.error('您只能上传pdf/doc/zip/rar!');
         }
-        const isLt20M = file.size / 1024 / 1024  < 20;
+        const isLt20M = file.size  < 20 * 1024 * 1024;
         if (!isLt20M) {
         message.error('上传文件不能大于 20MB!');
         }

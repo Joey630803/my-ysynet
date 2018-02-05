@@ -7,7 +7,7 @@ import AddPh from './addPh';
 import AddGzPlan from './addGzPlan';
 import AddJsPlan from './addJsPlan';
 import initialization from './initialization';
-
+import AddZwWareHouse from './addZwWareHouse';
 const rootReducer = combineReducers({
   Menu,
   User,
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
   AddPh,
   AddGzPlan,
   AddJsPlan,
-  initialization
+  initialization,
+  AddZwWareHouse,
 })
 
 export default rootReducer;

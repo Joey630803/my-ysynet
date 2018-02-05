@@ -77,6 +77,11 @@ export default {
   EXPORTWAREDETAIL:`${_local}/import/exportWarehouseByInId`,// 导出入库单详情
   PRINTIMPORTDETAIL:`${_local}/import/printImportDetail`,// 打印入库单详情
   PRINTOUTDETAIL:`${_local}/outportController/printOutportDetail`,// 打印出库单(一入一出)详情
+
+  FINDMYSUPPLIERLIST:`${_local}/source/findMySuppliersForSelector`,// 查询总务供应商列表
+  ANALYSEPURCHASEPRICE:`${_local}/import/analysePurchasePrice`,// 查询某个产品的历史价格
+  QUERYSTORAGEMATERIALLIST:`${_local}/storageMaterial/queryStorageMaterialList`,// 查询所选库房的产品目录
+  CREATEZWIMPORT:`${_local}/import/createZwImport`,// 总务物资入库
   //退货
   FINDBACKINNODETAILS:`${_local}/import/findBackImportDetails`,//退货查询
   INSERTBACKNODETAILS:`${_local}/import/insertBackImportDetails`,//退货生成入库记录
@@ -89,4 +94,12 @@ export default {
   STARTINVENTORY:`${_local}/stockTakingController/startInventory`,//新建盘点
   SAVEKCPD:`${_local}/stockTakingController/saveKcpd`,//保存盘点
   CONFIRMKCPD:`${_local}/stockTakingController/confirmKcpd`,//确认盘点
+  //总务发票
+  FINDMYINVOICELIST:`${_local}/generalInvoice/findMyInvoiceList`,//查询总务发票列表
+  EXPORTINVOICELIST:`${_local}/generalInvoice/exportInvoiceList`,//导出发票列表
+  FINDTOPSTORAGEBYUSER:`${_local}/storage/findTopStorageByUser`,//一级库房列表
+  FINDGENERALFORGLIST:`${_local}/source/findGeneralForgList`,//查询当前机构关联的供应机构列表
+  SEARCHDELIVERYLISTBYINVOICEID:`${_local}/invoiceController/searchDeliveryListByInvoiceId`,//根据发票查询关联的入库单列表
+  SEARCHDELIVERYLIST:`${_local}/generalInvoice/searchDeliveryList`,//根据库房和供应商查询已关联和未关联的送货单列表
+  SAVEORUPDATEINVOICE:`${_local}/generalInvoice/saveOrUpdateInvoice`,//保存发票
 };

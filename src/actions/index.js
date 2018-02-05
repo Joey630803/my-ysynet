@@ -14,6 +14,9 @@ export const CREATE_ADDJSPLAN = "CREATE_ADDJSPLAN";
 export const GET_ADDJSPLAN = "GET_ADDJSPLAN";
 export const CREATE_INITIALIZATION = "CREATE_INITIALIZATION";
 export const GET_INITIALIZATION = "GET_INITIALIZATION";
+export const CREATE_ZWADDWAREHOUSE = 'CREATE_ZWADDWAREHOUSE';//总务入库
+export const GET_ZWADDZWWAREHOUSE = 'GET_ZWADDZWWAREHOUSE';
+
 
 export const receivePosts = (json) => ({
   type: RECEIVE_POSTS,
@@ -91,5 +94,15 @@ export const createInitialization = (json) => ({
 
 export const getInitialization= (json) => ({
   type: GET_INITIALIZATION,
+  json
+})
+
+//总务入库
+export const createAddZWWareHouse = (json) => ({
+  type: CREATE_ZWADDWAREHOUSE,
+  json
+})
+export const getAddZwWareHouse= (json) => ({
+  type: GET_ZWADDZWWAREHOUSE,
   json
 })

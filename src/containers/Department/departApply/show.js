@@ -49,7 +49,7 @@ class InvoiceCheck extends React.Component{
                 dataIndex: 'purchasePrice',
                 width: 120,
                 render: (text,record,index) => {
-                    return text === 'undefined' ? '0.00' : text.toFixed(2)
+                    return text === 'undefined'|| text===null ? '0':text.toFixed(2);
                 }
                 }, {
                 title: '包装规格',
@@ -64,7 +64,7 @@ class InvoiceCheck extends React.Component{
                 dataIndex: 'money',
                 width: 100,
                 render: (text,record,index) => {
-                    return text === 'undefined' ? '0.00' : text.toFixed(2)
+                    return text === 'undefined'|| text===null ? '0':text.toFixed(2);
                 }
                 }, {
                 title: '品牌',

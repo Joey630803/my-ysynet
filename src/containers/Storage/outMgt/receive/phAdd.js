@@ -19,13 +19,13 @@
         selectedGuids: [],
         query: {
             storageGuid: this.props.location.state.storageGuid,
-            excludeTenderDetailGuids: this.props.location.state.excludeTenderDetailGuids,
+            excludeTenderMaterialGuids: this.props.location.state.excludeTenderDetailGuids,
         }
       }
     
     queryHandler = (query) => {
         query.storageGuid = this.state.query.storageGuid;
-        query.excludeTenderDetailGuids = this.state.query.excludeTenderDetailGuids;
+        query.excludeTenderMaterialGuids = this.state.query.excludeTenderMaterialGuids;
         this.refs.table.fetch(query);
         console.log(query,'query');
         this.setState({ query })
@@ -102,7 +102,7 @@
                 return null;
             });
             let query = this.state.query;
-            query.excludeTenderDetailGuids = selectedGuids.concat(guids);
+            query.excludeTenderMaterialGuids = selectedGuids.concat(guids);
             this.refs.table.fetch(query);
             this.setState({ totalSelectedRow ,selectedRows: [], selected: [],selectedGuids: selectedGuids.concat(guids), query});
         }
@@ -128,7 +128,7 @@
             title: '采购价格',
             dataIndex: 'purchasePrice',
             render:( text,record )=>{
-                return text === 'undefined' ? '0.0000' : text.toFixed(4);
+                return text === 'undefined'|| text===null ? '0.0000':text.toFixed(4);
            }
         },{
             title: '供应商',

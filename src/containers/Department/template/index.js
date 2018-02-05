@@ -390,7 +390,7 @@ class Template extends React.Component {
       dataIndex: 'purchasePrice',
       width: 100,
       render: (text, record, index) => {
-        return text === 'undefined' ? '0.00' : text.toFixed(2)
+        return text === 'undefined'|| text===null ? '0':text.toFixed(2);
       }
     }, {
       title: '需求数量',
@@ -407,7 +407,7 @@ class Template extends React.Component {
             record.amount = e.target.value;
             const templateId = this.state.template.id,
                   templateDetailGuid = record.templateDetailGuid,
-                  purchasePrice = record.purchasePrice,
+                  purchasePrice = record.purchasePrice || 0,
                   amount = e.target.value;
             throttle( () => {
               fetchData(department.EDIT_AMOUNT, querystring.stringify({

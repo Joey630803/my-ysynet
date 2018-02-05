@@ -5,21 +5,20 @@ import React from 'react';
 import { Row,Col,Button ,Form,Breadcrumb,message, Modal} from 'antd';
 import { Link ,hashHistory} from 'react-router';
 import FetchTable from 'component/FetchTable';
-import querystring from 'querystring';
-import {fetchData} from 'utils/tools';
+import { fetchData } from 'utils/tools';
 import SearchForm from './choiceSearchForm';
-import { storage } from 'api';
+import { purchase } from 'api';
 
 /** 挂载查询表单 */
 const SearchBox = Form.create()(SearchForm);
-//路径
-const MATERIAL_TITLES = {
-        choice:'选入'
-      };
+
 class StorageMaterial extends React.Component{
     state = {
-        query :{'storageGuid':this.props.location.state.storageGuid},
-        selectedRowKeys:[]
+        query :{
+            type:'01'
+        },
+        selectedRowKeys:[],
+        selectedRows:[]
     }
     handleError = (data) =>{
         Modal.error({
@@ -33,42 +32,60 @@ class StorageMaterial extends React.Component{
         this.refs.table.fetch(query);
         this.setState({ query })
     }
-     onSelectChange = (selectedRowKeys) => {
-        this.setState({ selectedRowKeys });
+     onSelectChange = (selectedRowKeys,selectedRows) => {
+        this.setState({selectedRowKeys: selectedRowKeys, selectedRows: selectedRows})
     }
     onClick = () => {
         const storageGuid = this.props.location.state.storageGuid;
-        const tenderMaterialGuids = this.state.selectedRowKeys;
-         fetchData(storage.CUSTOMERSTORAGESAVEMATERIAL,querystring.stringify({storageGuid:storageGuid,tenderMaterialGuids:tenderMaterialGuids}),(data)=>{
+        const tenderMaterials  = [];
+        if(this.state.selectedRows.length===0){
+            return message.info("请选择添加产品!")
+        }
+        this.state.selectedRows.map((item,index) => {
+         return   tenderMaterials.push({fitemid:item.fitemId,certGuid:item.certGuid,rStorageGuid:storageGuid});
+        })
+         fetchData(purchase.INSERTMATERIAL,JSON.stringify({tenderMaterials:tenderMaterials}),(data)=>{
             if(data.status){
-                hashHistory.push({pathname:'/storage/customerStorageMaterial',query:{storageGuid:storageGuid}});
+                hashHistory.push({pathname:'/purchase/zwMaterial',query:{storageGuid:storageGuid}});
                 message.success('选入产品成功');
             }
             else{
                 this.handleError(data.msg);
             }
-         })
+        },'application/json')
  
     }
     render(){
         const columns = [{
-            title : '通用名称',
-            dataIndex : 'geName',
+          title : '产品类型',
+          dataIndex : 'type',
+          width:100,
+          render:(text,record) =>{
+            if(text === "00"){
+              return "医疗器械"
+            }else if(text === "01"){
+              return "其他耗材"
+            }
+          }
         },{
             title : '产品名称',
             dataIndex : 'materialName'
         },{
-            title : '型号',
-            dataIndex : 'fmodel',
+          title : '规格',
+          dataIndex : 'spec',
         },{
-            title : '规格',
-            dataIndex : 'spec',
+          title : '型号',
+          dataIndex : 'fmodel',
         },{
-            title : '条码',
-            dataIndex : 'fbarcode'
+            title : '最小单位',
+            dataIndex : 'leastUnit',
+            width:100,
+        },{
+            title : '证件号',
+            dataIndex : 'registerNo'
         },{
             title : '品牌',
-            dataIndex : 'tfBrandName'
+            dataIndex : 'tfBrand'
         },{
             title : '生产商',
             dataIndex : 'produceName'
@@ -82,7 +99,7 @@ class StorageMaterial extends React.Component{
                 {this.props.children || 
                     <div>
                         <Breadcrumb style={{fontSize: '1.1em',marginBottom:'8px'}}>
-                            <Breadcrumb.Item><Link  to={{pathname:'/storage/customerStorageMaterial',query:{storageGuid:this.state.query.storageGuid}}}>库房产品</Link></Breadcrumb.Item>
+                            <Breadcrumb.Item><Link  to={{pathname:'/purchase/zwMaterial',query:{storageGuid:this.state.query.storageGuid}}}>总务物资</Link></Breadcrumb.Item>
                             <Breadcrumb.Item>选入产品</Breadcrumb.Item>
                         </Breadcrumb>
                         <SearchBox query={this.queryHandler} storageGuid={this.props.location.state.storageGuid}/>
@@ -92,15 +109,16 @@ class StorageMaterial extends React.Component{
                                     type="primary" 
                                     style={{marginRight:'8px'}}
                                     onClick={this.onClick}
-                                >{`${MATERIAL_TITLES.choice}`}</Button>
+                                >添加</Button>
                             </Col>
                         </Row>
                         <FetchTable 
                             query={query}
                             ref='table'
                             columns={columns}
-                            url={storage.CUSTOMERSTORAGEUNMATERIAL_LIST}
-                            rowKey='tenderMaterialGuid'
+                            url={purchase.SELECTMATERIALPAGE}
+                            rowKey='fitemid'
+                            scroll={{ x: '140%' }}
                             rowSelection={rowSelection}
                         />
                     </div>

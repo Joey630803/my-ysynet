@@ -109,7 +109,7 @@
                         </FormItem>
                     </Col>
                     <Col span={6} key={5}>
-                        <FormItem>
+                        <FormItem {...formItemLayout} label={`其他`}>
                             {
                                 getFieldDecorator('searchName')(
                                     <Input placeholder='计费清单号/就诊号/患者姓名/送货单号'/>

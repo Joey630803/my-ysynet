@@ -101,7 +101,7 @@ class AdjustPrice extends React.Component{
                                     </div>
                                     <div className="ant-col-18">
                                         <div className="ant-form-item-control">
-                                            <span>人名币</span>
+                                            <span>人民币</span>
                                             <Input placeholder='请输入' style={{width:'60%',margin:'0 5%'}} ref='afterMoney'/>
                                             <span>元</span>
                                         </div>

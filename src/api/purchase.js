@@ -98,4 +98,11 @@ export default {
   CONFIRMCHANGE:`${_local}/tenderController/confirmChange`,//变更证件——确认变更
   SEARCHTREELISTBYORGID:`${_local}/typeInfo/searchTreeTisByOrgId`,//查询本机构的树形结构物资分类类型
   SAVETMTYPEINFO:`${_local}/typeInfo/saveTmTypeInfo`,//保存证件的物资分类信息
+  //总务供应商
+  FINDGGENERALSUPPLIERLIST:`${_local}/general/findGeneralSupplierList`,//查询当前库房下的总务供应商
+  INSERTORUPDATEGENERALORGINFO:`${_local}/general/insertOrUpdateGeneralOrgInfo`,//对库房添加/编辑总务供应商
+  FINGDERTENDERSTORAGEMATERLIST:`${_local}/general/findTenderMaterialList`,//查询总务物资(产品)
+  UPDATEMATERIAL:`${_local}/general/updateMaterial`,//编辑总务物资
+  SELECTMATERIALPAGE:`${_local}/biddingFunctionalController/selectMaterialByPage`,//查询全部产品列表
+  INSERTMATERIAL:`${_local}/general/insertMaterial`,//总务物资添加产品
 };

@@ -185,7 +185,8 @@
             width: 140,
         },{
             title: '库房',
-            dataIndex : 'storageName'
+            dataIndex : 'storageName',
+            width: 150
         },{
             title : '出库分类',
             dataIndex : 'outType',
@@ -208,10 +209,11 @@
         },{
             title : '科室地址',
             dataIndex : 'deptAddress',
-            width: 150
+            width: 250
         },{
             title:'出库时间',
-            dataIndex : 'outDate'
+            dataIndex : 'outDate',
+            width: 160
         },{
             title : '备注',
             dataIndex : 'tfRemark'
@@ -240,7 +242,7 @@
                     columns={columns}
                     url={storage.SELECTOUTPORTLIST}
                     rowKey='outId'
-                    scroll={{ x: '120%' }}
+                    scroll={{ x: '130%' }}
                 />
             </div>
             }

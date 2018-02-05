@@ -104,7 +104,7 @@ class InvoiceList extends React.Component{
                     return (
                            <a onClick={
                             actionHandler.bind(
-                            null, this.props.router, `/purchase/invoiceCheck/show` , {...record}
+                            null, this.props.router, record.generalFlag === "01" ? `/purchase/invoiceCheck/zwShow` :`/purchase/invoiceCheck/show` , {...record}
                             )}>
                             {`查看`}
                         </a>

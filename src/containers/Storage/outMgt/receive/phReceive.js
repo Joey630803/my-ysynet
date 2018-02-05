@@ -196,7 +196,7 @@ class PhReceive extends React.Component{
             title : '采购价格',
             dataIndex : 'purchasePrice',
             render:(text, record)=>{
-                return text === 'undefined' ? '0.0000':text.toFixed(4);
+                return text === 'undefined'|| text===null ? '0.0000':text.toFixed(4);
             }
         },{
             title : '金额',

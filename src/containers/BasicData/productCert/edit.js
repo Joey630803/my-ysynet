@@ -2,7 +2,7 @@
  * @file 证件编辑
  */
 import React from 'react';
-import {DatePicker, Breadcrumb, Form, Input,Button,message,Select,Upload,Icon} from 'antd';
+import {DatePicker, Breadcrumb, Form, Input,Button,message,Select,Upload,Icon,Modal} from 'antd';
 import { Link,hashHistory } from 'react-router';
 import { CommonData,pathConfig,jsonNull,fetchData} from 'utils/tools';
 import { productUrl } from 'api';
@@ -58,11 +58,11 @@ class EditForm extends React.Component {
     })
   }
   beforeUpload = (file) => {
-    const type = file.type === 'image/jpeg'|| file.type === 'image/png'|| file.type === 'image/bmp' || file.type === 'application/pdf';
+    const type = file.type === 'image/jpeg'|| file.type === 'image/png'|| file.type === 'image/bmp';
     if (!type) {
       message.error('您只能上传image/jpeg、png、bmp!');
     }
-    const isLt5M = file.size / 1024 / 1024  < 5;
+    const isLt5M = file.size   < 5 * 1024 * 1024;
     if (!isLt5M) {
       message.error('上传文件不能大于 5MB!');
     }
@@ -70,16 +70,33 @@ class EditForm extends React.Component {
   }
   //上传附件限制大小
   beforeUploadFile = (file) => {
-    const type =  file.type === 'application/pdf' || file.type ==='application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    const typeinfo = file.name.toLowerCase().split('.').splice(-1)[0];
+    const type =  typeinfo === 'pdf' || typeinfo ==='docx'|| typeinfo ==='doc'|| typeinfo ==='zip'|| typeinfo ==='rar';
     if (!type) {
-      message.error('您只能上传pdf/doc!');
+      message.error('您只能上传pdf/doc/zip/rar!');
     }
-    const isLt20M = file.size / 1024 / 1024  < 20;
+    const isLt20M = file.size  < 20 * 1024 * 1024;
     if (!isLt20M) {
       message.error('上传文件不能大于 20MB!');
     }
     return type && isLt20M;
   }
+
+   //处理错误信息
+   handleError = (data) =>{
+    Modal.error({
+        title: '错误提示',
+        content: data,
+        okText: '确定'
+      });
+}
+componentDidUpdate(prevProps, prevState) {
+  if (this.state.tfAccessory !== '') {
+      const img = document.querySelector('.pdfUpload .ant-upload-list-item-thumbnail img');
+      img.src = `http://192.168.0.200:5656/ysy/ftp/ysyFile/standard/productCert/image/6801/fujian.jpg`
+  }
+}
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, fieldsValue) => {
@@ -98,7 +115,8 @@ class EditForm extends React.Component {
             message.success("编辑成功!");
           }
           else{
-            message.error(data.msg);
+            console.log(data.msg);
+            this.handleError("网络不通畅,请稍后再试!")
           }
         },'application/json')
        
@@ -132,7 +150,6 @@ class EditForm extends React.Component {
       return rule;
     };
     const data = this.props.data;
-    console.log(data,'data')
     return (
       <Form style={{marginTop: '16px'}} onSubmit={this.handleSubmit}>
         <FormItem 
@@ -378,7 +395,8 @@ class EditForm extends React.Component {
               :
               <FormItem {...formItemLayout} label={`附件`}>
                    <Upload 
-                   listType="picture"
+                   className='pdfUpload'
+                    listType="picture"
                     defaultFileList={this.state.fileList2}
                     action={pathConfig.PICUPLAOD_URL}
                     beforeUpload={this.beforeUploadFile}

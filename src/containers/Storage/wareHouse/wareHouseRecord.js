@@ -2,11 +2,11 @@
  * 入库记录
  */
 import React from 'react';
-import { Form, Row, Col, Input, DatePicker,Button,Select } from 'antd';
+import { Form, Row, Col, Input, DatePicker,Button,Select,Menu,Dropdown,Icon } from 'antd';
 import FetchTable from 'component/FetchTable';
+import { Link } from 'react-router';
 import { actionHandler,fetchData } from 'utils/tools';
 import { storage } from 'api';  
-
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RangePicker = DatePicker.RangePicker;
@@ -156,16 +156,16 @@ class WareHouseRecord extends React.Component{
         },{
             title : '入库单',
             dataIndex : 'InNo',
-            width: 200,
+            width: 120,
            
         },{
             title : '送货单',
             dataIndex : 'Send_Id',
-            width: 200,
+            width: 120,
         },{
             title : '订单',
             dataIndex : 'orderNo',
-            width: 150,
+            width: 120,
         },{
             title : '入库分类',
             dataIndex : 'inMode',
@@ -191,19 +191,31 @@ class WareHouseRecord extends React.Component{
             dataIndex : 'remark',
             width: 150
         }];
+       
         let query =  this.state.query;
-        return(
+         //入库按钮菜单
+        const menu = (
+            <Menu>
+                <Menu.Item key="0">
+                    <Link to='/storage/wareHouse/add'>医用耗材</Link>
+                </Menu.Item>
+                <Menu.Item key="1">
+                    <Link to='/storage/wareHouse/zwMaterial'>总务物资</Link>
+                </Menu.Item>
+            </Menu>
+        );
+            return(
             <div>
                 { this.props.children || 
                 <div>
                     <SearchBox query={this.queryHandler}/>
                     <Row>
                         <Col>
-                            <Button type="primary" 
-                            onClick={actionHandler.bind(
-                                null, this.props.router, `/storage/wareHouse/add`, { }
-                            )}>
-                            入库</Button>
+                            <Dropdown overlay={menu}>
+                                <Button style={{ marginLeft: 8 }}>
+                                    入库 <Icon type="down" />
+                                </Button>
+                            </Dropdown>
                             <Button type="primary" style={{marginLeft:16,marginRight:16}}
                             onClick={actionHandler.bind(
                                 null, this.props.router, `/storage/wareHouse/refund`, { }
@@ -222,7 +234,7 @@ class WareHouseRecord extends React.Component{
                         columns={columns}
                         url={storage.WAREHOUSELIST}
                         rowKey='inId'
-                        scroll={{ x: '180%' }}
+                        scroll={{ x: '150%' }}
                     />
                 </div>
                 }

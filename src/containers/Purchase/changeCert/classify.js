@@ -26,14 +26,14 @@ class CertClassify extends React.Component {
             })
         }
     }
-      //处理错误信息
-  handleError = (data) =>{
-    Modal.error({
-        title: '错误提示',
-        content: data,
-        okText: '确定'
-      });
-  }
+    //处理错误信息
+    handleError = (data) =>{
+        Modal.error({
+            title: '错误提示',
+            content: data,
+            okText: '确定'
+        });
+    }
     onChange = (value,label,extra) => {
         console.log(extra.triggerNode,'extra')
         const isLeaf = extra.triggerNode ? extra.triggerNode.props.isLeaf : true;

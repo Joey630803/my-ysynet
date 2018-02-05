@@ -156,7 +156,7 @@ class SearchForm extends React.Component {
         }
     };
     componentWillReceiveProps = () =>{
-      this.setState({ selected: [] });
+      this.setState({ selectedRows: [], selected:[] });
     }
     queryHandle = (query)=>{
       this.refs.table.fetch(query);
@@ -242,7 +242,7 @@ class SearchForm extends React.Component {
                           this.state.query.value &&
                           <FetchTable 
                               ref='table'
-                              rowKey={'tenderMaterialGuid'}
+                              rowKey={'RN'}
                               url={finance.FINDFINANCEPRODUCT}
                               query={this.state.query}
                               columns={columns}

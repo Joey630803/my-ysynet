@@ -176,9 +176,9 @@ class SearchForm extends React.Component {
                     </FormItem>
                 </Col>
                 <Col span={6} key={7}>
-                    <FormItem {...formItemLayout} label={`送货单号`}>
+                    <FormItem {...formItemLayout} label={`单号`}>
                     {getFieldDecorator(`sendNo`)(
-                        <Input/>
+                        <Input placeholder="请输入入库单号/送货单号"/>
                     )}
                     </FormItem>
                 </Col>
@@ -231,10 +231,11 @@ class MyInvoice extends React.Component{
                     return (
                           <a onClick={
                             actionHandler.bind(
-                            null, this.props.router, `/purchase/myInvoice/show` , {...record}
+                            null, this.props.router,record.generalFlag === "01" ? `/purchase/myInvoice/zwShow` :`/purchase/myInvoice/show`, {...record}
                             )}>
                             {`查看`}
-                        </a>
+                         </a>
+                         
                     )
                 }},{
                     title : '状态',

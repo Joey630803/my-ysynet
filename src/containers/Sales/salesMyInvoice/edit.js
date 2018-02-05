@@ -61,9 +61,7 @@ class EditForm extends React.Component {
             else{
                 this.handleError(data.msg);
             }
-            
         })
-        .catch(e => console.log("Oops, error", e))
     }
 
     //处理错误信息

@@ -214,6 +214,14 @@ export default {
                 cb(null, require('../containers/Purchase/invoiceCheck/show'))
               })
             }
+          },
+          {
+            path: '/purchase/invoiceCheck/zwShow',
+            getComponent: (nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('../containers/Purchase/invoiceCheck/zwShow'))
+              })
+            }
           }]
         },
         {
@@ -229,6 +237,14 @@ export default {
             getComponent: (nextState, cb) => {
               require.ensure([], (require) => {
                 cb(null, require('../containers/Purchase/myInvoice/show'))
+              })
+            }
+          },
+          {
+            path: '/purchase/myInvoice/zwShow',
+            getComponent: (nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('../containers/Purchase/myInvoice/zwShow'))
               })
             }
           }]
@@ -382,6 +398,55 @@ export default {
             getComponent: (nextState, cb) => {
               require.ensure([], (require) => {
                 cb(null, require('../containers/Purchase/changeCert/classify'))
+              })
+            }
+          }]
+        },
+        {
+          path: '/purchase/zwSupplier',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('../containers/Purchase/zwSupplier'))
+              })
+            },
+          childRoutes: [
+          {
+            path: '/purchase/zwSupplier/edit',
+            getComponent: (nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('../containers/Purchase/zwSupplier/edit'))
+              })
+            }
+          }, {
+            path: '/purchase/zwSupplier/add',
+            getComponent: (nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('../containers/Purchase/zwSupplier/add'))
+              })
+            }
+          }]
+        },
+        {
+          path: '/purchase/zwMaterial',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('../containers/Purchase/zwMaterial'))
+              })
+            },
+          childRoutes: [
+          {
+            path: '/purchase/zwMaterial/edit',
+            getComponent: (nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('../containers/Purchase/zwMaterial/edit'))
+              })
+            }
+          },
+          {
+            path: '/purchase/zwMaterial/addProduct',
+            getComponent: (nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('../containers/Purchase/zwMaterial/addProduct'))
               })
             }
           }]

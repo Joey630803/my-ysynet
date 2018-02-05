@@ -67,9 +67,8 @@ class EditForm extends React.Component {
         offset: 12,
       },
     };
-     const data = this.props.data;
-     const {unitData } = this.state;
-     console.log(data,'editData')
+    const data = this.props.data;
+    const { unitData } = this.state;
     return (
       <Form  onSubmit={this.handleSubmit}>
           <Row>

@@ -29,7 +29,7 @@ class YSYRoute extends React.Component {
             // })
           },
           onEnter: () => {
-            hashHistory.push({pathname: '/login'})//路由进入即触发
+            hashHistory.push({pathname: '/login'})
           }
         },
         {

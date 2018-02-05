@@ -336,6 +336,22 @@ export default {
                   cb(null, require('../containers/Storage/wareHouse/initialization'))
                 })
               }
+            },
+            {
+              path: '/storage/wareHouse/zwMaterial',
+              getComponent: (nextState, cb) => {
+                require.ensure([], (require) => {
+                  cb(null, require('../containers/Storage/wareHouse/zwMaterial'))
+                })
+              }
+            },
+            {
+              path: '/storage/wareHouse/zwAddProduct',
+              getComponent: (nextState, cb) => {
+                require.ensure([], (require) => {
+                  cb(null, require('../containers/Storage/wareHouse/zwAddProduct'))
+                })
+              }
             }
           ]
         },
@@ -476,5 +492,39 @@ export default {
       },
     ]
   },
+  //总务发票
+    { path: '/storage/zwInvoice',
+      getComponent: (nextState, cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('../containers/Storage/zwInvoice'))
+        })
+      },
+      childRoutes: [
+        {
+          path: '/storage/zwInvoice/add',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('../containers/Storage/zwInvoice/add'))
+            })
+          }
+        },
+        {
+          path: '/storage/zwInvoice/edit',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('../containers/Storage/zwInvoice/edit'))
+            })
+          }
+        },
+        {
+          path: '/storage/zwInvoice/show',
+          getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+              cb(null, require('../containers/Storage/zwInvoice/show'))
+            })
+          }
+        },
+      ]
+    },
     ]
   }

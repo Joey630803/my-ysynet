@@ -19,11 +19,11 @@ class AddProduct extends React.Component{
        selectedGuids: [],//勾选项 tenderMaterialGuid
        query: {
            storageGuid: this.props.location.state.values.storageGuid,
-           excludeTenderDetailGuids: this.props.location.state.excludeTenderDetailGuids,
+           excludeTenderMaterialGuids: this.props.location.state.excludeTenderDetailGuids,
        }
      }
    queryHandler = (query) => {
-       query.excludeTenderDetailGuids = this.state.query.excludeTenderDetailGuids;
+       query.excludeTenderMaterialGuids = this.state.query.excludeTenderMaterialGuids;
        query.storageGuid = this.state.query.storageGuid;
        this.refs.table.fetch(query);
        this.setState({ query });
@@ -101,7 +101,7 @@ class AddProduct extends React.Component{
                 return null;
             });
             let query = this.state.query;
-            query.excludeTenderDetailGuids = selectedGuids.concat(guids);
+            query.excludeTenderMaterialGuids = selectedGuids.concat(guids);
             this.refs.table.fetch(query);
             this.setState({ totalSelectedRow ,selectedRows: [], selected: [],selectedGuids: selectedGuids.concat(guids), query});
         }
@@ -127,7 +127,7 @@ class AddProduct extends React.Component{
            title: '采购价格',
            dataIndex: 'purchasePrice',
            render:( text,record )=>{
-                return text === 'undefined' ? '0.0000' : text.toFixed(4);
+                return text === 'undefined'|| text===null ? '0.0000':text.toFixed(4);
            }
        },{
            title: '供应商',
