@@ -2,17 +2,21 @@
  * 入库
  */
 import React from 'react';
-import {  Row, Col, Breadcrumb,Table,Collapse,Input ,Button,Modal,message  } from 'antd';
+import {  Row, Col, Breadcrumb,Table,Collapse,Input ,Button,Modal,message,Form} from 'antd';
 import { Link ,hashHistory} from 'react-router';
 import { fetchData } from 'utils/tools';
 import { storage } from 'api';  
 import querystring from 'querystring';
+import Refuse from './refuse'
 
 const Panel = Collapse.Panel;
+const FormItem=Form.Item
+
 class WareHouseAdd extends React.Component{
     state = {
         dataSource:[],
-        baseData:""
+        baseData:"",
+        modalVisible:false,
     }
     handleError = (data) =>{
         Modal.error({
@@ -25,7 +29,11 @@ class WareHouseAdd extends React.Component{
     handleSearch = (e) =>{
         e.preventDefault();
         //获取input的值
-        const sendNo = this.refs.sendNo.refs.input.value ;
+        let aaa=this.props.form.validateFields((error, values) => {
+            let sendNo=values.sendNo
+            return sendNo
+        })
+        const sendNo = aaa ;
         console.log(sendNo,"送货单号")
         //根据送货单号查询信息
         fetchData(storage.FINDDELIVERYINFO,querystring.stringify({sendNo:sendNo}),(data)=>{
@@ -62,6 +70,13 @@ class WareHouseAdd extends React.Component{
             }
 
         })
+    }
+    //拒收
+    handleRefuse=()=>{
+        this.setModalVisible(true)
+    }
+    setModalVisible=(a)=>{
+        this.setState({modalVisible:a})
     }
     render(){
         const columns = [{
@@ -116,10 +131,28 @@ class WareHouseAdd extends React.Component{
         const footer = () => {
             return <Row><Col className="ant-col-6">总金额:{baseData===""?"0.00": baseData.sumPrice.toFixed(2)}</Col></Row>
         }; 
+        const { getFieldDecorator } = this.props.form;
+        const formItemLayout = {
+            labelCol: {
+              xs: { span: 6 },
+              sm: { span: 4 },
+            },
+            wrapperCol: {
+              xs: { span: 24 },
+              sm: { span: 16 },
+            },
+          };
+        const RefuseData={
+            modalVisible:this.state.modalVisible, 
+            handleRefuse:this.handleRefuse,
+            setModalVisible:this.setModalVisible,
+            baseData:this.state.baseData,
+        }
         return (
             <div>
             { this.props.children || 
                 <div>
+                <Refuse {...RefuseData}/>
                     <Row>
                         <Col className="ant-col-6">
                             <Breadcrumb style={{fontSize: '1.1em',marginBottom:24}}>
@@ -129,39 +162,59 @@ class WareHouseAdd extends React.Component{
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="ant-col-6">
-                            <div className="ant-row">
-                                <div className="ant-col-4" style={{textAlign:'right',marginTop:10,color:"#ff00ff"}}>
-                                    *
-                                </div>
-                                <div className="ant-col-18">
-                                    <div className="ant-form-item-control">
-                                      <Input placeholder="输入送货单号" ref="sendNo" onPressEnter={this.handleSearch}/>
-                                    </div>
-                                </div>
-                            </div>
+                        <Col className="ant-col-12">
+
+                                <Form onSubmit={this.handleSubmit}>
+
+                                    <FormItem 
+                                    {...formItemLayout}
+                                    label="送货单号">
+                                        {getFieldDecorator('sendNo', {
+                                            rules: [{
+                                                type: '', message: '',
+                                              }, {
+                                                required: true, message: '必须输入订单号!',
+                                              }],
+                                        })(
+                                      <Input placeholder="输入送货单号" onPressEnter={this.handleSearch}/>
+                                        )}
+                                    </FormItem>
+                                </Form>
+
                         </Col>
                         <Col className="ant-col-6">
                             <Button type="primary" onClick={this.handleSearch}> 搜索</Button>
                         </Col>
-                        <Col className="ant-col-12" style={{textAlign:'right'}}>
-                            <Button type="primary" onClick={this.handleSumbit}> 提交</Button>
+                        <Col className="ant-col-6" style={{textAlign:'right'}}>
+                            <Button type="primary" onClick={this.handleSumbit} style={{marginRight:'10px'}}> 确认入库</Button>
+                            <Button type="default" onClick={this.handleRefuse}> 拒收</Button>
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="ant-col-6">
-                            <div className="ant-row">
-                                <div className="ant-col-4 ant-form-item-label-left">
-                                    <label>备注</label>
-                                </div>
-                                <div className="ant-col-18">
-                                    <div className="ant-form-item-control">
-                                        <Input ref="remark"/>
-                                    </div>
-                                </div>
-                            </div>
+                        <Col className="ant-col-12">
+                        
+                                <Form onSubmit={this.handleSubmit}>
+
+                                    <FormItem 
+                                    {...formItemLayout}
+                                    label="备注">
+                                        {getFieldDecorator('remark', {
+                                            rules: [{
+                                                type: '', message: '',
+                                              }, {
+                                                required: false, message: '这不是必须的!',
+                                              }],
+                                        })(
+                                      <Input placeholder=""/>
+                                        )}
+                                    </FormItem>
+                                </Form>
+
                         </Col>
+                        <Col className="ant-col-6"></Col>
+                        <Col className="ant-col-6"></Col>
                     </Row>
+
                     <Collapse defaultActiveKey={['1','2']}>
                         <Panel header="单据信息" key="1">
                             <Row>
@@ -263,10 +316,13 @@ class WareHouseAdd extends React.Component{
                         />
                         </Panel>
                     </Collapse>
+
                 </div>
+
             }
             </div>
         )
     }
 }
-module.exports = WareHouseAdd;
+const WareHouseAdds=Form.create()(WareHouseAdd)
+module.exports = WareHouseAdds;

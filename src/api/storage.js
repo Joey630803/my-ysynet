@@ -82,6 +82,10 @@ export default {
   ANALYSEPURCHASEPRICE:`${_local}/import/analysePurchasePrice`,// 查询某个产品的历史价格
   QUERYSTORAGEMATERIALLIST:`${_local}/storageMaterial/queryStorageMaterialList`,// 查询所选库房的产品目录
   CREATEZWIMPORT:`${_local}/import/createZwImport`,// 总务物资入库
+
+  REFUSE:`${_local}/check/deliveryNotThrough`,//拒绝入库
+
+  
   //退货
   FINDBACKINNODETAILS:`${_local}/import/findBackImportDetails`,//退货查询
   INSERTBACKNODETAILS:`${_local}/import/insertBackImportDetails`,//退货生成入库记录

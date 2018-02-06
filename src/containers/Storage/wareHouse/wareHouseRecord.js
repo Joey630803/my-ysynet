@@ -33,7 +33,7 @@ class SearchForm extends React.Component{
                 values.inDateStart = inDateTime[0].format('YYYY-MM-DD');
                 values.inDateEnd = inDateTime[1].format('YYYY-MM-DD');
             }
-            console.log(values,"搜索数据")
+            //console.log(values,"搜索数据")
             this.props.query(values); 
        });
     }

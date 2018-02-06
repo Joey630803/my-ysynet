@@ -33,7 +33,7 @@ class SearchForm extends React.Component{
                 values.inDateStart = inDateTime[0].format('YYYY-MM-DD');
                 values.inDateEnd = inDateTime[1].format('YYYY-MM-DD');
             }
-            console.log(values,"搜索数据")
+            //console.log(values,"搜索数据")
             this.props.query(values); 
        });
     }
@@ -75,7 +75,24 @@ class SearchForm extends React.Component{
                     </FormItem>
                 </Col>
            
-                 <Col span={8} key={3}>
+                <Col span={8} key={3}>
+                <FormItem {...formItemLayout} label={'入库分类'}>
+                    {getFieldDecorator('inMode',{
+                        initialValue:""
+                    })(
+                        <Select>
+                            <Option value="" key={-1}>全部</Option>
+                            <Option value="01">采购入库</Option>
+                            <Option value="04">盘盈</Option>
+                            <Option value="05">初始化</Option>
+                            <Option value="06">退货</Option>
+                        </Select>
+                    )}
+                </FormItem>
+                </Col>
+
+
+                 <Col span={8} key={4}>
                     <FormItem {...formItemLayout} label={'供应商'}>
                         {getFieldDecorator('fOrgId',{
                             initialValue:""
@@ -92,14 +109,14 @@ class SearchForm extends React.Component{
                     </FormItem>
                 </Col>
                
-                <Col span={8} key={4}>
+                <Col span={8} key={5}>
                     <FormItem {...formItemLayout} label={'单号/名称'}>
                         {getFieldDecorator('searchName')(
                              <Input placeholder="请输入库单号/产品名称/通用名称"/>
                         )}
                     </FormItem>
                 </Col>
-                <Col span={4} key={5} style={{textAlign:'right'}}>
+                <Col span={4} key={6} style={{textAlign:'right'}}>
                     <Button type="primary" htmlType="submit">搜索</Button>
                     <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
                         清除
@@ -128,7 +145,13 @@ class WareHouseDetails extends React.Component{
             dataIndex : 'InNo',
             width: 180,
            
-        },{
+        },
+        {
+            title : '入库分类',
+            dataIndex : 'inMode',
+            width: 100,
+        },
+        {
             title : '二维码',
             dataIndex : 'qrCode',
             width: 120,
@@ -172,7 +195,8 @@ class WareHouseDetails extends React.Component{
             title : '金额',
             dataIndex : 'money',
             width: 120
-        },{
+        },
+        {
             title : '供应商',
             dataIndex : 'forgName',
             width: 200
